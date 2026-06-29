@@ -1,5 +1,7 @@
 import { useState } from "react";
-import { HomePage, ToolId } from "./pages/HomePage";
+import { ToolId } from "./content/tools";
+import { HomePage } from "./pages/HomePage";
+import { ConsultationChecklistTool } from "./tools/checklist/ConsultationChecklistTool";
 import { SoapNoteTool } from "./tools/soap/SoapNoteTool";
 
 export default function App() {
@@ -7,6 +9,10 @@ export default function App() {
 
   if (activeTool === "soap") {
     return <SoapNoteTool onBack={() => setActiveTool(null)} />;
+  }
+
+  if (activeTool === "consultation-checklist") {
+    return <ConsultationChecklistTool onBack={() => setActiveTool(null)} />;
   }
 
   return <HomePage onOpenTool={setActiveTool} />;
