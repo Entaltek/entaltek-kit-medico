@@ -68,7 +68,7 @@ export function SoapNoteTool({ onBack }: SoapNoteToolProps) {
       .filter(Boolean)
       .join(" - ");
 
-    return `${patientLine}\n${form.chiefComplaint ? `Motivo de consulta: ${form.chiefComplaint}\n` : ""}${vitalSigns ? `Signos vitales: ${vitalSigns}\n` : ""}\nNOTA SOAP\n\nS - Subjetivo\n${form.subjective || "Sin datos registrados."}\n\nO - Objetivo\n${form.objective || "Sin datos registrados."}\n\nA - Analisis\n${form.assessment || "Sin datos registrados."}\n\nP - Plan\n${form.plan || "Sin datos registrados."}\n\nNota: Esta herramienta organiza informacion clinica. No sustituye el criterio medico ni los lineamientos institucionales.`;
+    return `${patientLine}\n${form.chiefComplaint ? `Motivo de consulta: ${form.chiefComplaint}\n` : ""}${vitalSigns ? `Signos vitales: ${vitalSigns}\n` : ""}\nNOTA SOAP\n\nS - Subjetivo\n${form.subjective || "Sin datos registrados."}\n\nO - Objetivo\n${form.objective || "Sin datos registrados."}\n\nA - Análisis\n${form.assessment || "Sin datos registrados."}\n\nP - Plan\n${form.plan || "Sin datos registrados."}\n\nNota: Esta herramienta organiza información clínica. No sustituye el criterio médico ni los lineamientos institucionales.`;
   }, [form, vitalSigns]);
 
   const updateField = (field: keyof SoapForm, value: string) => {
@@ -113,13 +113,13 @@ export function SoapNoteTool({ onBack }: SoapNoteToolProps) {
           <button
             type="button"
             onClick={onBack}
-            className="km-press km-focus mb-4 rounded-full border border-[#E5DED4] bg-white px-4 py-2 text-sm font-medium text-[#52606D] hover:border-[#0F766E] hover:text-[#0F766E]"
+            className="km-press km-focus mb-4 rounded-full border border-[#E5DED4] bg-white px-4 py-2 text-sm font-medium text-[#52606D] hover:border-[#0179B1] hover:text-[#0179B1]"
           >
             Volver al kit
           </button>
 
           <div className="rounded-[2rem] border border-[#E5DED4] bg-white p-5 shadow-sm sm:p-7">
-            <span className="inline-flex rounded-full bg-[#E6F3EF] px-3 py-1 text-xs font-semibold text-[#115E59]">
+            <span className="inline-flex rounded-full bg-[#E3F1F8] px-3 py-1 text-xs font-semibold text-[#004C7A]">
               Herramienta editable
             </span>
             <h1 className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">
@@ -133,16 +133,16 @@ export function SoapNoteTool({ onBack }: SoapNoteToolProps) {
 
         <section className="no-print rounded-[2rem] border border-[#E5DED4] bg-white p-5 shadow-sm sm:p-6">
           <div className="mb-5">
-            <h2 className="text-lg font-semibold">Datos rapidos</h2>
+            <h2 className="text-lg font-semibold">Datos rápidos</h2>
             <p className="mt-1 text-sm text-[#697586]">Identifica la nota y registra signos vitales si los tienes.</p>
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2">
             <Field label="Nombre del paciente">
-              <input value={form.patientName} onChange={(event) => updateField("patientName", event.target.value)} placeholder="Ej. Juan Perez" className="input-base" />
+              <input value={form.patientName} onChange={(event) => updateField("patientName", event.target.value)} placeholder="Ej. Juan Pérez" className="input-base" />
             </Field>
             <Field label="Edad">
-              <input value={form.age} onChange={(event) => updateField("age", event.target.value)} placeholder="Ej. 28 anios" className="input-base" />
+              <input value={form.age} onChange={(event) => updateField("age", event.target.value)} placeholder="Ej. 28 años" className="input-base" />
             </Field>
             <Field label="Fecha">
               <input type="date" value={form.date} onChange={(event) => updateField("date", event.target.value)} className="input-base" />
@@ -162,10 +162,10 @@ export function SoapNoteTool({ onBack }: SoapNoteToolProps) {
           </div>
 
           <div className="mt-6">
-            <p className="mb-2 text-sm font-semibold text-[#344054]">Plantillas rapidas</p>
+            <p className="mb-2 text-sm font-semibold text-[#344054]">Plantillas rápidas</p>
             <div className="flex gap-2 overflow-x-auto pb-1">
               {soapTemplates.map((template) => (
-                <button key={template.id} type="button" onClick={() => applyTemplate(template)} className="km-press km-focus whitespace-nowrap rounded-full border border-[#E5DED4] bg-white px-4 py-2 text-sm font-semibold text-[#52606D] hover:border-[#0F766E] hover:text-[#0F766E]">
+                <button key={template.id} type="button" onClick={() => applyTemplate(template)} className="km-press km-focus whitespace-nowrap rounded-full border border-[#E5DED4] bg-white px-4 py-2 text-sm font-semibold text-[#52606D] hover:border-[#0179B1] hover:text-[#0179B1]">
                   {template.label}
                 </button>
               ))}
@@ -173,19 +173,19 @@ export function SoapNoteTool({ onBack }: SoapNoteToolProps) {
           </div>
 
           <div className="mt-6 grid gap-4">
-            <TextAreaField label="S - Subjetivo" helper="Lo que refiere el paciente: sintomas, evolucion y contexto." value={form.subjective} onChange={(value) => updateField("subjective", value)} />
-            <TextAreaField label="O - Objetivo" helper="Signos vitales, exploracion fisica y hallazgos medibles." value={form.objective} onChange={(value) => updateField("objective", value)} />
-            <TextAreaField label="A - Analisis" helper="Impresion clinica o problemas activos, sin extenderse de mas." value={form.assessment} onChange={(value) => updateField("assessment", value)} />
+            <TextAreaField label="S - Subjetivo" helper="Lo que refiere el paciente: síntomas, evolución y contexto." value={form.subjective} onChange={(value) => updateField("subjective", value)} />
+            <TextAreaField label="O - Objetivo" helper="Signos vitales, exploración física y hallazgos medibles." value={form.objective} onChange={(value) => updateField("objective", value)} />
+            <TextAreaField label="A - Análisis" helper="Impresión clínica o problemas activos, sin extenderse de más." value={form.assessment} onChange={(value) => updateField("assessment", value)} />
             <TextAreaField label="P - Plan" helper="Manejo, estudios, seguimiento, datos de alarma y referencia si aplica." value={form.plan} onChange={(value) => updateField("plan", value)} />
           </div>
         </section>
 
-        <aside className="rounded-[2rem] border border-[#E5DED4] bg-[#1F2933] p-5 text-white shadow-sm sm:p-6 lg:sticky lg:top-5 lg:self-start print-area">
+        <aside className="rounded-[2rem] border border-[#E5DED4] bg-[#013762] p-5 text-white shadow-sm sm:p-6 lg:sticky lg:top-5 lg:self-start print-area">
           <div className="no-print mb-5">
             <h2 className="text-lg font-semibold">Vista lista para copiar</h2>
-            <p className="mt-1 text-sm leading-6 text-white/65">Revisa antes de pegar en expediente o sistema institucional.</p>
-            <p className="mt-3 inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-white/80">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#34D399]" />
+            <p className="mt-1 text-sm leading-6 text-white/70">Revisa antes de pegar en expediente o sistema institucional.</p>
+            <p className="mt-3 inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-white/85">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#47DAD6]" />
               Borrador guardado en este dispositivo
             </p>
           </div>
@@ -198,7 +198,7 @@ export function SoapNoteTool({ onBack }: SoapNoteToolProps) {
             <button type="button" onClick={copyNote} className="km-press km-focus-dark rounded-xl bg-white px-4 py-3 text-sm font-semibold text-[#1F2933] hover:bg-[#F7F4EF]">
               {copyStatus === "copied" ? "Nota copiada" : "Copiar nota"}
             </button>
-            <button type="button" onClick={() => window.print()} className="km-press km-focus-dark rounded-xl bg-[#0F766E] px-4 py-3 text-sm font-semibold text-white hover:bg-[#115E59]">
+            <button type="button" onClick={() => window.print()} className="km-press km-focus-dark rounded-xl bg-[#0179B1] px-4 py-3 text-sm font-semibold text-white hover:bg-[#004C7A]">
               Exportar PDF
             </button>
             <button type="button" onClick={exportAsTextFile} className="km-press km-focus-dark rounded-xl border border-white/15 px-4 py-3 text-sm font-semibold text-white hover:bg-white/10">
@@ -232,7 +232,7 @@ function TextAreaField({ label, helper, value, onChange }: { label: string; help
     <label className="grid gap-2">
       <span className="label-base">{label}</span>
       <span className="helper-base">{helper}</span>
-      <textarea value={value} onChange={(event) => onChange(event.target.value)} placeholder="Escribe aqui los datos relevantes." rows={5} className="input-base min-h-[132px] resize-y leading-6" />
+      <textarea value={value} onChange={(event) => onChange(event.target.value)} placeholder="Escribe aquí los datos relevantes." rows={5} className="input-base min-h-[132px] resize-y leading-6" />
     </label>
   );
 }
