@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ToolId } from "./content/tools";
 import { HomePage } from "./pages/HomePage";
 import { ConsultationChecklistTool } from "./tools/checklist/ConsultationChecklistTool";
@@ -7,6 +7,10 @@ import { SoapNoteTool } from "./tools/soap/SoapNoteTool";
 
 export default function App() {
   const [activeTool, setActiveTool] = useState<ToolId | null>(null);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [activeTool]);
 
   if (activeTool === "soap") {
     return <SoapNoteTool onBack={() => setActiveTool(null)} />;
