@@ -18,6 +18,13 @@
     --km-danger: #be5a5a;
   }
 
+  html,
+  body,
+  #root {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
   body {
     background: var(--km-bg);
     color: var(--km-ink);
@@ -26,7 +33,7 @@
 
 @layer components {
   .input-base {
-    @apply w-full rounded-xl border border-[#E5DED4] bg-white px-4 py-3 text-sm text-[#1F2933] outline-none transition placeholder:text-[#9AA4B2] focus:border-[#0179B1] focus:ring-4 focus:ring-[#0179B1]/15;
+    @apply min-w-0 w-full rounded-xl border border-[#E5DED4] bg-white px-4 py-3 text-sm text-[#1F2933] outline-none transition placeholder:text-[#9AA4B2] focus:border-[#0179B1] focus:ring-4 focus:ring-[#0179B1]/15;
   }
 
   .label-base {
@@ -64,6 +71,27 @@
 .km-focus-dark:focus-visible {
   outline: none;
   box-shadow: 0 0 0 2px #013762, 0 0 0 4px rgba(71, 218, 214, 0.75);
+}
+
+/* Evita que textos largos, inputs o previews generen scroll horizontal en mobile */
+.km-anim-screen,
+.km-anim-screen section,
+.km-anim-screen header,
+.km-anim-screen aside,
+.km-anim-screen article,
+.km-anim-screen div,
+.km-anim-screen label,
+.km-anim-screen pre {
+  min-width: 0;
+}
+
+.km-anim-screen h1,
+.km-anim-screen h2,
+.km-anim-screen h3,
+.km-anim-screen p,
+.km-anim-screen span,
+.km-anim-screen pre {
+  overflow-wrap: anywhere;
 }
 
 /* Animaciones suaves de entrada */
