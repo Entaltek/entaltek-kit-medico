@@ -77,13 +77,13 @@ export function ClinicalHistoryTool({ onBack }: ClinicalHistoryToolProps) {
   };
 
   return (
-    <main className="min-h-screen bg-[#F7F4EF] text-[#1F2933]">
+    <main className="km-anim-screen min-h-screen bg-[#F7F4EF] text-[#1F2933]">
       <section className="mx-auto grid w-full max-w-[1440px] gap-5 px-4 py-5 sm:px-6 lg:grid-cols-[1fr_0.95fr] lg:px-10 xl:px-12">
         <header className="no-print lg:col-span-2">
           <button
             type="button"
             onClick={onBack}
-            className="mb-4 rounded-full border border-[#E5DED4] bg-white px-4 py-2 text-sm font-medium text-[#52606D] transition hover:border-[#0F766E] hover:text-[#0F766E]"
+            className="km-press km-focus mb-4 rounded-full border border-[#E5DED4] bg-white px-4 py-2 text-sm font-medium text-[#52606D] hover:border-[#0F766E] hover:text-[#0F766E]"
           >
             Volver al kit
           </button>
@@ -144,16 +144,16 @@ export function ClinicalHistoryTool({ onBack }: ClinicalHistoryToolProps) {
           </pre>
 
           <div className="no-print mt-5 grid gap-3 sm:grid-cols-2">
-            <button type="button" onClick={copyHistory} className="rounded-xl bg-white px-4 py-3 text-sm font-semibold text-[#1F2933] transition hover:bg-[#F7F4EF]">
+            <button type="button" onClick={copyHistory} className="km-press km-focus-dark rounded-xl bg-white px-4 py-3 text-sm font-semibold text-[#1F2933] hover:bg-[#F7F4EF]">
               {copyStatus === "copied" ? "Historia copiada" : "Copiar historia"}
             </button>
-            <button type="button" onClick={() => window.print()} className="rounded-xl bg-[#0F766E] px-4 py-3 text-sm font-semibold text-white transition hover:bg-[#115E59]">
+            <button type="button" onClick={() => window.print()} className="km-press km-focus-dark rounded-xl bg-[#0F766E] px-4 py-3 text-sm font-semibold text-white hover:bg-[#115E59]">
               Exportar PDF
             </button>
-            <button type="button" onClick={exportAsTextFile} className="rounded-xl border border-white/15 px-4 py-3 text-sm font-semibold text-white transition hover:bg-white/10">
+            <button type="button" onClick={exportAsTextFile} className="km-press km-focus-dark rounded-xl border border-white/15 px-4 py-3 text-sm font-semibold text-white hover:bg-white/10">
               Descargar TXT
             </button>
-            <button type="button" onClick={clearDraft} className="rounded-xl border border-white/15 px-4 py-3 text-sm font-semibold text-white/80 transition hover:bg-white/10">
+            <button type="button" onClick={clearDraft} className="km-press km-focus-dark rounded-xl border border-white/15 px-4 py-3 text-sm font-semibold text-white/80 hover:bg-white/10">
               Limpiar borrador
             </button>
           </div>
