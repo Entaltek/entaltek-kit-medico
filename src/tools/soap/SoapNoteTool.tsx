@@ -1,5 +1,6 @@
 import { ReactNode, useMemo, useState } from "react";
 import { SoapTemplate, soapTemplates } from "../../content/soapTemplates";
+import { useLocalDraft } from "../../hooks/useLocalDraft";
 
 type SoapForm = {
   patientName: string;
@@ -42,7 +43,7 @@ const initialForm: SoapForm = {
 };
 
 export function SoapNoteTool({ onBack }: SoapNoteToolProps) {
-  const [form, setForm] = useState<SoapForm>(initialForm);
+  const { value: form, setValue: setForm, clearDraft } = useLocalDraft<SoapForm>("kit-medico:soap-draft", initialForm);
   const [copyStatus, setCopyStatus] = useState<"idle" | "copied" | "error">("idle");
 
   const vitalSigns = useMemo(() => {
@@ -107,7 +108,7 @@ export function SoapNoteTool({ onBack }: SoapNoteToolProps) {
 
   return (
     <main className="min-h-screen bg-[#F7F4EF] text-[#1F2933]">
-      <section className="mx-auto grid w-full max-w-6xl gap-5 px-4 py-5 sm:px-6 lg:grid-cols-[0.95fr_1.05fr] lg:px-8">
+      <section className="mx-auto grid w-full max-w-[1440px] gap-5 px-4 py-5 sm:px-6 lg:grid-cols-[1fr_0.95fr] lg:px-10 xl:px-12">
         <header className="no-print lg:col-span-2">
           <button
             type="button"
@@ -179,10 +180,14 @@ export function SoapNoteTool({ onBack }: SoapNoteToolProps) {
           </div>
         </section>
 
-        <aside className="rounded-[2rem] border border-[#E5DED4] bg-[#1F2933] p-5 text-white shadow-sm sm:p-6 print-area">
+        <aside className="rounded-[2rem] border border-[#E5DED4] bg-[#1F2933] p-5 text-white shadow-sm sm:p-6 lg:sticky lg:top-5 lg:self-start print-area">
           <div className="no-print mb-5">
             <h2 className="text-lg font-semibold">Vista lista para copiar</h2>
             <p className="mt-1 text-sm leading-6 text-white/65">Revisa antes de pegar en expediente o sistema institucional.</p>
+            <p className="mt-3 inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-white/80">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#34D399]" />
+              Borrador guardado en este dispositivo
+            </p>
           </div>
 
           <pre className="max-h-[620px] overflow-auto whitespace-pre-wrap rounded-2xl border border-white/10 bg-white/10 p-4 text-sm leading-6 text-white/90 print-area">
@@ -199,8 +204,8 @@ export function SoapNoteTool({ onBack }: SoapNoteToolProps) {
             <button type="button" onClick={exportAsTextFile} className="rounded-xl border border-white/15 px-4 py-3 text-sm font-semibold text-white transition hover:bg-white/10">
               Descargar TXT
             </button>
-            <button type="button" onClick={() => setForm(initialForm)} className="rounded-xl border border-white/15 px-4 py-3 text-sm font-semibold text-white/80 transition hover:bg-white/10">
-              Limpiar
+            <button type="button" onClick={clearDraft} className="rounded-xl border border-white/15 px-4 py-3 text-sm font-semibold text-white/80 transition hover:bg-white/10">
+              Limpiar borrador
             </button>
           </div>
 
