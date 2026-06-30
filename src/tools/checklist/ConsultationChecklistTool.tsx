@@ -61,6 +61,7 @@ const checklistItems: ChecklistItem[] = [
 export function ConsultationChecklistTool({ onBack }: ConsultationChecklistToolProps) {
   const [checked, setChecked] = useState<Record<string, boolean>>({});
   const [note, setNote] = useState("");
+  const [copyStatus, setCopyStatus] = useState<"idle" | "copied" | "error">("idle");
 
   const completed = useMemo(
     () => checklistItems.filter((item) => checked[item.id]).length,
@@ -88,7 +89,13 @@ export function ConsultationChecklistTool({ onBack }: ConsultationChecklistToolP
   };
 
   const copySummary = async () => {
-    await navigator.clipboard.writeText(summary);
+    try {
+      await navigator.clipboard.writeText(summary);
+      setCopyStatus("copied");
+      window.setTimeout(() => setCopyStatus("idle"), 2200);
+    } catch {
+      setCopyStatus("error");
+    }
   };
 
   return (
@@ -139,6 +146,7 @@ export function ConsultationChecklistTool({ onBack }: ConsultationChecklistToolP
                   key={item.id}
                   type="button"
                   onClick={() => toggleItem(item.id)}
+                  aria-pressed={isChecked}
                   className={[
                     "km-focus rounded-2xl border p-4 text-left transition duration-200 active:scale-[0.99]",
                     isChecked
@@ -148,6 +156,7 @@ export function ConsultationChecklistTool({ onBack }: ConsultationChecklistToolP
                 >
                   <div className="flex gap-3">
                     <span
+                      aria-hidden="true"
                       className={[
                         "mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border text-xs font-bold",
                         isChecked
@@ -195,7 +204,7 @@ export function ConsultationChecklistTool({ onBack }: ConsultationChecklistToolP
               onClick={copySummary}
               className="km-press km-focus-dark rounded-xl bg-white px-4 py-3 text-sm font-semibold text-[#1F2933] hover:bg-[#F7F4EF]"
             >
-              Copiar resumen
+              {copyStatus === "copied" ? "Resumen copiado" : "Copiar resumen"}
             </button>
             <button
               type="button"
@@ -208,6 +217,12 @@ export function ConsultationChecklistTool({ onBack }: ConsultationChecklistToolP
               Reiniciar
             </button>
           </div>
+
+          {copyStatus === "error" && (
+            <p className="mt-3 rounded-xl bg-[#BE5A5A]/20 px-4 py-3 text-sm text-white">
+              No se pudo copiar. Selecciona el texto manualmente.
+            </p>
+          )}
         </aside>
       </section>
     </main>
