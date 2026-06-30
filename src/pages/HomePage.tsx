@@ -62,9 +62,9 @@ export function HomePage({ onOpenTool }: HomePageProps) {
   }[backendStatus];
 
   return (
-    <main className="min-h-screen bg-[#F7F4EF] text-[#1F2933]">
+    <main className="km-anim-screen min-h-screen bg-[#F7F4EF] text-[#1F2933]">
       <section className="mx-auto w-full max-w-[1440px] px-4 py-6 sm:px-6 lg:px-10 xl:px-12">
-        <header className="mb-6 flex items-start justify-between gap-4">
+        <header className="km-anim-fade-up mb-6 flex items-start justify-between gap-4">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#0F766E]">
               Kit clinico practico
@@ -104,7 +104,7 @@ export function HomePage({ onOpenTool }: HomePageProps) {
           </div>
         </header>
 
-        <section className="mb-6 overflow-hidden rounded-[2rem] border border-[#E5DED4] bg-white shadow-sm">
+        <section className="km-anim-fade-up mb-6 overflow-hidden rounded-[2rem] border border-[#E5DED4] bg-white shadow-sm" style={{ animationDelay: "60ms" }}>
           <div className="grid gap-0 lg:grid-cols-[1.35fr_0.65fr]">
             <div className="p-5 sm:p-8 xl:p-10">
               <span className="inline-flex rounded-full bg-[#E6F3EF] px-3 py-1 text-xs font-semibold text-[#115E59]">
@@ -121,21 +121,21 @@ export function HomePage({ onOpenTool }: HomePageProps) {
                 <button
                   type="button"
                   onClick={() => onOpenTool?.("soap")}
-                  className="rounded-xl bg-[#0F766E] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#115E59]"
+                  className="km-press km-focus rounded-xl bg-[#0F766E] px-5 py-3 text-sm font-semibold text-white shadow-sm hover:bg-[#115E59] hover:shadow-md"
                 >
                   Abrir Nota SOAP
                 </button>
                 <button
                   type="button"
                   onClick={() => onOpenTool?.("historia-clinica")}
-                  className="rounded-xl border border-[#E5DED4] bg-white px-5 py-3 text-sm font-semibold text-[#52606D] transition hover:border-[#0F766E] hover:text-[#0F766E]"
+                  className="km-press km-focus rounded-xl border border-[#E5DED4] bg-white px-5 py-3 text-sm font-semibold text-[#52606D] hover:border-[#0F766E] hover:text-[#0F766E]"
                 >
                   Abrir historia clinica
                 </button>
                 <button
                   type="button"
                   onClick={() => onOpenTool?.("consultation-checklist")}
-                  className="rounded-xl border border-[#E5DED4] bg-white px-5 py-3 text-sm font-semibold text-[#52606D] transition hover:border-[#0F766E] hover:text-[#0F766E]"
+                  className="km-press km-focus rounded-xl border border-[#E5DED4] bg-white px-5 py-3 text-sm font-semibold text-[#52606D] hover:border-[#0F766E] hover:text-[#0F766E]"
                 >
                   Abrir checklist
                 </button>
@@ -159,7 +159,7 @@ export function HomePage({ onOpenTool }: HomePageProps) {
           </div>
         </section>
 
-        <div className="mb-4 grid gap-3 lg:grid-cols-[1fr_auto] lg:items-center">
+        <div className="km-anim-fade-up mb-4 grid gap-3 lg:grid-cols-[1fr_auto] lg:items-center" style={{ animationDelay: "120ms" }}>
           <input
             value={query}
             onChange={(event) => setQuery(event.target.value)}
@@ -171,7 +171,7 @@ export function HomePage({ onOpenTool }: HomePageProps) {
           </p>
         </div>
 
-        <nav className="mb-5 flex gap-2 overflow-x-auto pb-1" aria-label="Categorias de herramientas">
+        <nav className="km-anim-fade-up mb-5 flex gap-2 overflow-x-auto pb-1" style={{ animationDelay: "160ms" }} aria-label="Categorias de herramientas">
           {toolCategories.map((category) => {
             const isActive = category.id === activeCategory;
 
@@ -181,7 +181,7 @@ export function HomePage({ onOpenTool }: HomePageProps) {
                 type="button"
                 onClick={() => setActiveCategory(category.id)}
                 className={[
-                  "whitespace-nowrap rounded-full px-4 py-2 text-sm font-semibold transition",
+                  "km-press km-focus whitespace-nowrap rounded-full px-4 py-2 text-sm font-semibold",
                   isActive
                     ? "bg-[#1F2933] text-white"
                     : "border border-[#E5DED4] bg-white text-[#52606D] hover:border-[#0F766E] hover:text-[#0F766E]",
@@ -194,13 +194,14 @@ export function HomePage({ onOpenTool }: HomePageProps) {
         </nav>
 
         <section className="grid gap-3 pb-24 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {filteredTools.map((tool) => {
+          {filteredTools.map((tool, index) => {
             const isReady = tool.status === "Listo";
 
             return (
               <article
                 key={tool.id}
-                className="rounded-3xl border border-[#E5DED4] bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-[#A7C4B5] hover:shadow-md"
+                style={{ animationDelay: `${Math.min(index, 8) * 45}ms` }}
+                className="km-anim-fade-up group rounded-3xl border border-[#E5DED4] bg-white p-5 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-[#0F766E] hover:shadow-lg"
               >
                 <div className="mb-4 flex items-center justify-between gap-3">
                   <span className="rounded-full bg-[#F7F4EF] px-3 py-1 text-xs font-semibold text-[#52606D]">
@@ -228,9 +229,9 @@ export function HomePage({ onOpenTool }: HomePageProps) {
                   disabled={!isReady}
                   onClick={() => openTool(tool)}
                   className={[
-                    "mt-5 w-full rounded-xl px-4 py-3 text-sm font-semibold transition",
+                    "km-focus mt-5 w-full rounded-xl px-4 py-3 text-sm font-semibold transition duration-200",
                     isReady
-                      ? "bg-[#0F766E] text-white hover:bg-[#115E59]"
+                      ? "bg-[#0F766E] text-white shadow-sm hover:bg-[#115E59] hover:shadow-md active:scale-[0.98]"
                       : "cursor-not-allowed bg-[#F3EEE7] text-[#9AA4B2]",
                   ].join(" ")}
                 >

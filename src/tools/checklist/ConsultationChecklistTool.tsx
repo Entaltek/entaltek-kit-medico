@@ -92,13 +92,13 @@ export function ConsultationChecklistTool({ onBack }: ConsultationChecklistToolP
   };
 
   return (
-    <main className="min-h-screen bg-[#F7F4EF] text-[#1F2933]">
-      <section className="mx-auto grid w-full max-w-6xl gap-5 px-4 py-5 sm:px-6 lg:grid-cols-[1fr_0.8fr] lg:px-8">
+    <main className="km-anim-screen min-h-screen bg-[#F7F4EF] text-[#1F2933]">
+      <section className="mx-auto grid w-full max-w-[1440px] gap-5 px-4 py-5 sm:px-6 lg:grid-cols-[1fr_0.85fr] lg:px-10 xl:px-12">
         <header className="lg:col-span-2">
           <button
             type="button"
             onClick={onBack}
-            className="mb-4 rounded-full border border-[#E5DED4] bg-white px-4 py-2 text-sm font-medium text-[#52606D] transition hover:border-[#0F766E] hover:text-[#0F766E]"
+            className="km-press km-focus mb-4 rounded-full border border-[#E5DED4] bg-white px-4 py-2 text-sm font-medium text-[#52606D] hover:border-[#0F766E] hover:text-[#0F766E]"
           >
             Volver al kit
           </button>
@@ -140,10 +140,10 @@ export function ConsultationChecklistTool({ onBack }: ConsultationChecklistToolP
                   type="button"
                   onClick={() => toggleItem(item.id)}
                   className={[
-                    "rounded-2xl border p-4 text-left transition",
+                    "km-focus rounded-2xl border p-4 text-left transition duration-200 active:scale-[0.99]",
                     isChecked
                       ? "border-[#0F766E] bg-[#E6F3EF]"
-                      : "border-[#E5DED4] bg-white hover:border-[#A7C4B5]",
+                      : "border-[#E5DED4] bg-white hover:-translate-y-0.5 hover:border-[#A7C4B5] hover:shadow-sm",
                   ].join(" ")}
                 >
                   <div className="flex gap-3">
@@ -168,7 +168,7 @@ export function ConsultationChecklistTool({ onBack }: ConsultationChecklistToolP
           </div>
         </section>
 
-        <aside className="rounded-[2rem] border border-[#E5DED4] bg-[#1F2933] p-5 text-white shadow-sm sm:p-6">
+        <aside className="rounded-[2rem] border border-[#E5DED4] bg-[#1F2933] p-5 text-white shadow-sm sm:p-6 lg:sticky lg:top-5 lg:self-start">
           <h2 className="text-lg font-semibold">Resumen</h2>
           <p className="mt-1 text-sm leading-6 text-white/65">
             Puedes copiarlo como recordatorio o usarlo para documentar pendientes.
@@ -193,7 +193,7 @@ export function ConsultationChecklistTool({ onBack }: ConsultationChecklistToolP
             <button
               type="button"
               onClick={copySummary}
-              className="rounded-xl bg-white px-4 py-3 text-sm font-semibold text-[#1F2933] transition hover:bg-[#F7F4EF]"
+              className="km-press km-focus-dark rounded-xl bg-white px-4 py-3 text-sm font-semibold text-[#1F2933] hover:bg-[#F7F4EF]"
             >
               Copiar resumen
             </button>
@@ -203,7 +203,7 @@ export function ConsultationChecklistTool({ onBack }: ConsultationChecklistToolP
                 setChecked({});
                 setNote("");
               }}
-              className="rounded-xl border border-white/15 px-4 py-3 text-sm font-semibold text-white/80 transition hover:bg-white/10"
+              className="km-press km-focus-dark rounded-xl border border-white/15 px-4 py-3 text-sm font-semibold text-white/80 hover:bg-white/10"
             >
               Reiniciar
             </button>
