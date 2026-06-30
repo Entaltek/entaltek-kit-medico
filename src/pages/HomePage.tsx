@@ -1,15 +1,40 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { ToolCategoryId, ToolDefinition, ToolId, toolCategories, tools } from "../content/tools";
+import { BackendHealth, getBackendHealth } from "../lib/api";
 
 type HomePageProps = {
   onOpenTool?: (toolId: ToolId) => void;
 };
 
+type BackendStatus = "checking" | "online" | "offline";
+
 export function HomePage({ onOpenTool }: HomePageProps) {
   const [query, setQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState<ToolCategoryId>("todos");
+  const [backendStatus, setBackendStatus] = useState<BackendStatus>("checking");
+  const [backendHealth, setBackendHealth] = useState<BackendHealth | null>(null);
 
   const readyCount = tools.filter((tool) => tool.status === "Listo").length;
+
+  useEffect(() => {
+    let isMounted = true;
+
+    getBackendHealth()
+      .then((health) => {
+        if (!isMounted) return;
+        setBackendHealth(health);
+        setBackendStatus("online");
+      })
+      .catch(() => {
+        if (!isMounted) return;
+        setBackendHealth(null);
+        setBackendStatus("offline");
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   const filteredTools = useMemo(() => {
     const value = query.trim().toLowerCase();
@@ -30,6 +55,12 @@ export function HomePage({ onOpenTool }: HomePageProps) {
     onOpenTool?.(tool.id);
   };
 
+  const backendLabel = {
+    checking: "Revisando API",
+    online: "API conectada",
+    offline: "Modo local",
+  }[backendStatus];
+
   return (
     <main className="min-h-screen bg-[#F7F4EF] text-[#1F2933]">
       <section className="mx-auto w-full max-w-[1440px] px-4 py-6 sm:px-6 lg:px-10 xl:px-12">
@@ -47,9 +78,29 @@ export function HomePage({ onOpenTool }: HomePageProps) {
             </p>
           </div>
 
-          <div className="hidden rounded-2xl border border-[#E5DED4] bg-white px-5 py-4 text-right shadow-sm sm:block">
-            <p className="text-3xl font-semibold text-[#0F766E]">{readyCount}</p>
-            <p className="text-xs font-semibold text-[#697586]">herramientas listas</p>
+          <div className="hidden grid-cols-1 gap-3 sm:grid">
+            <div className="rounded-2xl border border-[#E5DED4] bg-white px-5 py-4 text-right shadow-sm">
+              <p className="text-3xl font-semibold text-[#0F766E]">{readyCount}</p>
+              <p className="text-xs font-semibold text-[#697586]">herramientas listas</p>
+            </div>
+            <div className="rounded-2xl border border-[#E5DED4] bg-white px-5 py-4 text-right shadow-sm">
+              <div className="flex items-center justify-end gap-2">
+                <span
+                  className={[
+                    "h-2.5 w-2.5 rounded-full",
+                    backendStatus === "online"
+                      ? "bg-[#0F766E]"
+                      : backendStatus === "checking"
+                        ? "bg-[#D97706]"
+                        : "bg-[#9AA4B2]",
+                  ].join(" ")}
+                />
+                <p className="text-sm font-semibold text-[#1F2933]">{backendLabel}</p>
+              </div>
+              <p className="mt-1 text-xs font-semibold text-[#697586]">
+                {backendHealth ? `${backendHealth.service} v${backendHealth.version}` : "Frontend usable sin backend"}
+              </p>
+            </div>
           </div>
         </header>
 
@@ -101,6 +152,9 @@ export function HomePage({ onOpenTool }: HomePageProps) {
               <p className="mt-5 rounded-2xl bg-white/10 p-4 text-xs leading-5 text-white/65">
                 Esta app organiza informacion. No sustituye guias, normas, protocolos institucionales ni juicio medico.
               </p>
+              <div className="mt-4 rounded-2xl bg-white/10 p-4 text-xs leading-5 text-white/65 sm:hidden">
+                Estado: {backendLabel}. {backendHealth ? `${backendHealth.service} v${backendHealth.version}` : "Puedes usar las herramientas en modo local."}
+              </div>
             </div>
           </div>
         </section>
