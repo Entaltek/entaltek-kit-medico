@@ -56,7 +56,7 @@
 /* Foco accesible visible (no depende solo del color: anillo + offset) */
 .km-focus:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 2px #f7f4ef, 0 0 0 4px #0f766e;
+  box-shadow: 0 0 0 2px #f7f4ef, 0 0 0 4px #0179b1;
 }
 
 .km-focus-dark:focus-visible {
