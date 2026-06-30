@@ -9,9 +9,11 @@
     --km-ink: #1f2933;
     --km-muted: #697586;
     --km-border: #e5ded4;
-    --km-primary: #0f766e;
-    --km-primary-dark: #115e59;
-    --km-soft: #e6f3ef;
+    --km-primary: #0179b1;
+    --km-primary-dark: #004c7a;
+    --km-navy: #013762;
+    --km-accent: #47dad6;
+    --km-soft: #e3f1f8;
     --km-warning: #d97706;
     --km-danger: #be5a5a;
   }
@@ -24,7 +26,7 @@
 
 @layer components {
   .input-base {
-    @apply w-full rounded-xl border border-[#E5DED4] bg-white px-4 py-3 text-sm text-[#1F2933] outline-none transition placeholder:text-[#9AA4B2] focus:border-[#0F766E] focus:ring-4 focus:ring-[#0F766E]/10;
+    @apply w-full rounded-xl border border-[#E5DED4] bg-white px-4 py-3 text-sm text-[#1F2933] outline-none transition placeholder:text-[#9AA4B2] focus:border-[#0179B1] focus:ring-4 focus:ring-[#0179B1]/15;
   }
 
   .label-base {
@@ -61,7 +63,7 @@
 
 .km-focus-dark:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 2px #1f2933, 0 0 0 4px rgba(255, 255, 255, 0.7);
+  box-shadow: 0 0 0 2px #013762, 0 0 0 4px rgba(71, 218, 214, 0.75);
 }
 
 /* Animaciones suaves de entrada */
@@ -95,7 +97,7 @@
   }
 }
 
-/* Respeto a usuarios con reduccion de movimiento del sistema */
+/* Respeto a usuarios con reducción de movimiento del sistema */
 @media (prefers-reduced-motion: reduce) {
   .km-anim-fade-up,
   .km-anim-screen {
