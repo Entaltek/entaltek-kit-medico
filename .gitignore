@@ -1,0 +1,21 @@
+# Dependencias
+node_modules/
+
+# Build
+dist/
+
+# Lockfiles generados localmente (el proyecto usa "latest" en package.json)
+package-lock.json
+
+# Logs
+*.log
+npm-debug.log*
+
+# Entorno
+.env
+.env.local
+
+# Editor / SO
+.DS_Store
+.vscode/
+.idea/

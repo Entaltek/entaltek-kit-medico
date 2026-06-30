@@ -1,4 +1,5 @@
 import { ReactNode, useMemo, useState } from "react";
+import { useLocalDraft } from "../../hooks/useLocalDraft";
 
 type ClinicalHistoryForm = {
   patientName: string;
@@ -43,7 +44,7 @@ const initialForm: ClinicalHistoryForm = {
 };
 
 export function ClinicalHistoryTool({ onBack }: ClinicalHistoryToolProps) {
-  const [form, setForm] = useState<ClinicalHistoryForm>(initialForm);
+  const { value: form, setValue: setForm, clearDraft } = useLocalDraft<ClinicalHistoryForm>("kit-medico:clinical-history-draft", initialForm);
   const [copyStatus, setCopyStatus] = useState<"idle" | "copied" | "error">("idle");
 
   const generatedHistory = useMemo(() => {
@@ -128,10 +129,14 @@ export function ClinicalHistoryTool({ onBack }: ClinicalHistoryToolProps) {
           </div>
         </section>
 
-        <aside className="rounded-[2rem] border border-[#E5DED4] bg-[#1F2933] p-5 text-white shadow-sm sm:p-6 print-area">
+        <aside className="rounded-[2rem] border border-[#E5DED4] bg-[#1F2933] p-5 text-white shadow-sm sm:p-6 lg:sticky lg:top-5 lg:self-start print-area">
           <div className="no-print mb-5">
             <h2 className="text-lg font-semibold">Vista lista para copiar</h2>
             <p className="mt-1 text-sm leading-6 text-white/65">Revisa antes de pegar en expediente o imprimir.</p>
+            <p className="mt-3 inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-white/80">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#34D399]" />
+              Borrador guardado en este dispositivo
+            </p>
           </div>
 
           <pre className="max-h-[720px] overflow-auto whitespace-pre-wrap rounded-2xl border border-white/10 bg-white/10 p-4 text-sm leading-6 text-white/90 print-area">
@@ -148,8 +153,8 @@ export function ClinicalHistoryTool({ onBack }: ClinicalHistoryToolProps) {
             <button type="button" onClick={exportAsTextFile} className="rounded-xl border border-white/15 px-4 py-3 text-sm font-semibold text-white transition hover:bg-white/10">
               Descargar TXT
             </button>
-            <button type="button" onClick={() => setForm(initialForm)} className="rounded-xl border border-white/15 px-4 py-3 text-sm font-semibold text-white/80 transition hover:bg-white/10">
-              Limpiar
+            <button type="button" onClick={clearDraft} className="rounded-xl border border-white/15 px-4 py-3 text-sm font-semibold text-white/80 transition hover:bg-white/10">
+              Limpiar borrador
             </button>
           </div>
 
