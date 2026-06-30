@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { ReactNode, useEffect, useMemo, useState } from "react";
 import { ToolCategoryId, ToolDefinition, ToolId, toolCategories, tools } from "../content/tools";
 import { BackendHealth, getBackendHealth } from "../lib/api";
 
@@ -61,109 +61,94 @@ export function HomePage({ onOpenTool }: HomePageProps) {
     offline: "Modo local",
   }[backendStatus];
 
+  const apiBadgeTone: BadgeTone =
+    backendStatus === "online" ? "teal" : backendStatus === "checking" ? "amber" : "muted";
+
   return (
     <main className="km-anim-screen min-h-screen bg-[#F7F4EF] text-[#1F2933]">
       <section className="mx-auto w-full max-w-[1440px] px-4 py-6 sm:px-6 lg:px-10 xl:px-12">
-        <header className="km-anim-fade-up mb-6 flex items-start justify-between gap-4">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#0F766E]">
-              Kit clinico practico
-            </p>
-            <h1 className="mt-2 text-3xl font-semibold tracking-tight sm:text-5xl xl:text-6xl">
-              Kit del Medico de Primer Nivel
-            </h1>
-            <p className="mt-4 max-w-3xl text-base leading-7 text-[#52606D] sm:text-lg">
-              Herramientas clinicas listas para consulta, guardia y primer contacto.
-              No reemplaza tu criterio clinico; te ayuda a ordenar la informacion.
-            </p>
-          </div>
-
-          <div className="hidden grid-cols-1 gap-3 sm:grid">
-            <div className="rounded-2xl border border-[#E5DED4] bg-white px-5 py-4 text-right shadow-sm">
-              <p className="text-3xl font-semibold text-[#0F766E]">{readyCount}</p>
-              <p className="text-xs font-semibold text-[#697586]">herramientas listas</p>
-            </div>
-            <div className="rounded-2xl border border-[#E5DED4] bg-white px-5 py-4 text-right shadow-sm">
-              <div className="flex items-center justify-end gap-2">
-                <span
-                  className={[
-                    "h-2.5 w-2.5 rounded-full",
-                    backendStatus === "online"
-                      ? "bg-[#0F766E]"
-                      : backendStatus === "checking"
-                        ? "bg-[#D97706]"
-                        : "bg-[#9AA4B2]",
-                  ].join(" ")}
-                />
-                <p className="text-sm font-semibold text-[#1F2933]">{backendLabel}</p>
-              </div>
-              <p className="mt-1 text-xs font-semibold text-[#697586]">
-                {backendHealth ? `${backendHealth.service} v${backendHealth.version}` : "Frontend usable sin backend"}
-              </p>
-            </div>
-          </div>
-        </header>
-
-        <section className="km-anim-fade-up mb-6 overflow-hidden rounded-[2rem] border border-[#E5DED4] bg-white shadow-sm" style={{ animationDelay: "60ms" }}>
-          <div className="grid gap-0 lg:grid-cols-[1.35fr_0.65fr]">
+        {/* Hero: propuesta de valor clara en menos de 10 segundos */}
+        <section className="km-anim-fade-up mb-6 overflow-hidden rounded-[2rem] border border-[#E5DED4] bg-white shadow-sm">
+          <div className="grid gap-0 lg:grid-cols-[1.4fr_0.6fr]">
             <div className="p-5 sm:p-8 xl:p-10">
-              <span className="inline-flex rounded-full bg-[#E6F3EF] px-3 py-1 text-xs font-semibold text-[#115E59]">
-                Para medicos jovenes en primer contacto
-              </span>
-              <h2 className="mt-4 max-w-3xl text-2xl font-semibold tracking-tight sm:text-4xl xl:text-5xl">
-                Abre, llena, copia y sigue con la consulta.
-              </h2>
-              <p className="mt-3 max-w-3xl text-sm leading-6 text-[#697586] sm:text-base">
-                El MVP ya incluye Nota SOAP, Checklist de consulta e Historia clinica.
-                Lo siguiente sera referencia, consentimiento y seguimiento de cronicos.
+              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#0F766E]">
+                Kit del Medico de Primer Nivel
               </p>
-              <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+              <h1 className="mt-3 max-w-3xl text-3xl font-semibold tracking-tight sm:text-5xl xl:text-6xl">
+                Herramientas clinicas para documentar consultas mas rapido
+              </h1>
+              <p className="mt-4 max-w-2xl text-base leading-7 text-[#52606D] sm:text-lg">
+                Formatos editables, notas SOAP, checklist de consulta e historia clinica.
+                Sin enviar datos clinicos al servidor.
+              </p>
+
+              <div className="mt-5 flex flex-wrap gap-2" aria-label="Caracteristicas del producto">
+                <Badge tone="teal">Beta</Badge>
+                <Badge tone="neutral">Procesamiento local</Badge>
+                <Badge tone="neutral">Sin registro</Badge>
+                <Badge tone={apiBadgeTone} dot>{backendLabel}</Badge>
+              </div>
+
+              <div className="mt-7 flex flex-col gap-3 sm:flex-row">
                 <button
                   type="button"
                   onClick={() => onOpenTool?.("soap")}
                   className="km-press km-focus rounded-xl bg-[#0F766E] px-5 py-3 text-sm font-semibold text-white shadow-sm hover:bg-[#115E59] hover:shadow-md"
                 >
-                  Abrir Nota SOAP
-                </button>
-                <button
-                  type="button"
-                  onClick={() => onOpenTool?.("historia-clinica")}
-                  className="km-press km-focus rounded-xl border border-[#E5DED4] bg-white px-5 py-3 text-sm font-semibold text-[#52606D] hover:border-[#0F766E] hover:text-[#0F766E]"
-                >
-                  Abrir historia clinica
+                  Probar nota SOAP
                 </button>
                 <button
                   type="button"
                   onClick={() => onOpenTool?.("consultation-checklist")}
                   className="km-press km-focus rounded-xl border border-[#E5DED4] bg-white px-5 py-3 text-sm font-semibold text-[#52606D] hover:border-[#0F766E] hover:text-[#0F766E]"
                 >
-                  Abrir checklist
+                  Ver checklist
                 </button>
               </div>
+
+              <p className="mt-5 text-xs font-medium text-[#697586]">
+                {readyCount} herramientas listas hoy. {backendHealth ? `${backendHealth.service} v${backendHealth.version}.` : ""} Funciona en tu navegador, sin instalar nada.
+              </p>
             </div>
 
-            <div className="bg-[#1F2933] p-5 text-white sm:p-8 xl:p-10">
-              <p className="text-sm font-semibold text-white/60">Uso recomendado</p>
-              <ul className="mt-4 grid gap-3 text-sm leading-6 text-white/80">
-                <li>1. Captura lo minimo indispensable.</li>
-                <li>2. Revisa que el plan y alarmas queden claros.</li>
-                <li>3. Copia la nota al expediente o imprime PDF.</li>
+            {/* Seccion de privacidad: visible arriba del pliegue */}
+            <aside className="bg-[#1F2933] p-5 text-white sm:p-8 xl:p-10">
+              <p className="text-sm font-semibold text-white/60">Privacidad por diseno</p>
+              <ul className="mt-4 grid gap-3 text-sm leading-6 text-white/85">
+                <li className="flex gap-2">
+                  <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#34D399]" />
+                  Procesamiento local en tu navegador.
+                </li>
+                <li className="flex gap-2">
+                  <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#34D399]" />
+                  Los borradores se guardan solo en este dispositivo.
+                </li>
+                <li className="flex gap-2">
+                  <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#34D399]" />
+                  No sustituye tu juicio clinico.
+                </li>
               </ul>
               <p className="mt-5 rounded-2xl bg-white/10 p-4 text-xs leading-5 text-white/65">
                 Esta app organiza informacion. No sustituye guias, normas, protocolos institucionales ni juicio medico.
               </p>
-              <div className="mt-4 rounded-2xl bg-white/10 p-4 text-xs leading-5 text-white/65 sm:hidden">
-                Estado: {backendLabel}. {backendHealth ? `${backendHealth.service} v${backendHealth.version}` : "Puedes usar las herramientas en modo local."}
-              </div>
-            </div>
+            </aside>
           </div>
         </section>
+
+        {/* Seccion de herramientas disponibles */}
+        <div className="km-anim-fade-up mb-4 flex items-end justify-between gap-4" style={{ animationDelay: "60ms" }}>
+          <div>
+            <h2 className="text-xl font-semibold tracking-tight sm:text-2xl">Herramientas disponibles</h2>
+            <p className="mt-1 text-sm text-[#697586]">Abre, llena y copia al expediente. Lo siguiente: referencia, consentimiento y cronicos.</p>
+          </div>
+        </div>
 
         <div className="km-anim-fade-up mb-4 grid gap-3 lg:grid-cols-[1fr_auto] lg:items-center" style={{ animationDelay: "120ms" }}>
           <input
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             placeholder="Busca: SOAP, diabetes, referencia..."
+            aria-label="Buscar herramientas"
             className="w-full rounded-2xl border border-[#E5DED4] bg-white px-4 py-3 text-base outline-none transition placeholder:text-[#9AA4B2] focus:border-[#0F766E] focus:ring-4 focus:ring-[#0F766E]/10"
           />
           <p className="rounded-2xl border border-[#E5DED4] bg-white px-4 py-3 text-sm font-semibold text-[#697586]">
@@ -192,6 +177,13 @@ export function HomePage({ onOpenTool }: HomePageProps) {
             );
           })}
         </nav>
+
+        {filteredTools.length === 0 && (
+          <div className="km-anim-fade-up mb-24 rounded-3xl border border-dashed border-[#E5DED4] bg-white p-8 text-center">
+            <p className="text-sm font-semibold text-[#344054]">Sin resultados para tu busqueda.</p>
+            <p className="mt-1 text-sm text-[#697586]">Prueba con otra palabra o limpia los filtros.</p>
+          </div>
+        )}
 
         <section className="grid gap-3 pb-24 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {filteredTools.map((tool, index) => {
@@ -251,5 +243,30 @@ export function HomePage({ onOpenTool }: HomePageProps) {
         </footer>
       </section>
     </main>
+  );
+}
+
+type BadgeTone = "teal" | "amber" | "muted" | "neutral";
+
+function Badge({ children, tone, dot = false }: { children: ReactNode; tone: BadgeTone; dot?: boolean }) {
+  const toneClass = {
+    teal: "bg-[#E6F3EF] text-[#115E59]",
+    amber: "bg-[#FBEFD8] text-[#8A6A3C]",
+    muted: "bg-[#F0EEE9] text-[#52606D]",
+    neutral: "bg-[#F0EEE9] text-[#52606D]",
+  }[tone];
+
+  const dotClass = {
+    teal: "bg-[#0F766E]",
+    amber: "bg-[#D97706]",
+    muted: "bg-[#9AA4B2]",
+    neutral: "bg-[#9AA4B2]",
+  }[tone];
+
+  return (
+    <span className={["inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold", toneClass].join(" ")}>
+      {dot && <span aria-hidden="true" className={["h-1.5 w-1.5 rounded-full", dotClass].join(" ")} />}
+      {children}
+    </span>
   );
 }
