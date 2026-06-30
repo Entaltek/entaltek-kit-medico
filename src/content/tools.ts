@@ -19,7 +19,7 @@ export type ToolCategoryId =
   | "tamizaje"
   | "referencia";
 
-export type ToolStatus = "Listo" | "Proximamente";
+export type ToolStatus = "Listo" | "Próximamente";
 
 export type ToolDefinition = {
   id: ToolId;
@@ -43,7 +43,7 @@ export const tools: ToolDefinition[] = [
   {
     id: "soap",
     title: "Nota SOAP",
-    description: "Ordena subjetivo, objetivo, analisis y plan en una nota lista para copiar.",
+    description: "Ordena subjetivo, objetivo, análisis y plan en una nota lista para copiar.",
     category: "consulta",
     tag: "Editable",
     status: "Listo",
@@ -58,19 +58,19 @@ export const tools: ToolDefinition[] = [
   },
   {
     id: "historia-clinica",
-    title: "Historia clinica",
-    description: "Formato base para antecedentes, interrogatorio, exploracion e impresion clinica.",
+    title: "Historia clínica",
+    description: "Formato base para antecedentes, interrogatorio, exploración e impresión clínica.",
     category: "formatos",
     tag: "Formato",
     status: "Listo",
   },
   {
     id: "exploracion-fisica",
-    title: "Exploracion fisica",
+    title: "Exploración física",
     description: "Listas por sistema para documentar hallazgos sin perder estructura.",
     category: "consulta",
     tag: "Checklist",
-    status: "Proximamente",
+    status: "Próximamente",
   },
   {
     id: "consentimiento",
@@ -78,54 +78,54 @@ export const tools: ToolDefinition[] = [
     description: "Plantillas breves para procedimientos frecuentes de primer contacto.",
     category: "formatos",
     tag: "Plantilla",
-    status: "Proximamente",
+    status: "Próximamente",
   },
   {
     id: "prenatal",
     title: "Control prenatal",
-    description: "Guia de seguimiento, datos de alarma y registro basico de control.",
+    description: "Guía de seguimiento, datos de alarma y registro básico de control.",
     category: "seguimiento",
-    tag: "Guia",
-    status: "Proximamente",
+    tag: "Guía",
+    status: "Próximamente",
   },
   {
     id: "diabetes",
     title: "Diabetes",
     description: "Hoja de control para metas, tratamiento, laboratorios y seguimiento.",
     category: "seguimiento",
-    tag: "Cronicos",
-    status: "Proximamente",
+    tag: "Crónicos",
+    status: "Próximamente",
   },
   {
     id: "hipertension",
-    title: "Hipertension",
-    description: "Registro simple para presion arterial, riesgo y plan de manejo.",
+    title: "Hipertensión",
+    description: "Registro simple para presión arterial, riesgo y plan de manejo.",
     category: "seguimiento",
-    tag: "Cronicos",
-    status: "Proximamente",
+    tag: "Crónicos",
+    status: "Próximamente",
   },
   {
     id: "crecimiento",
     title: "Crecimiento y desarrollo",
-    description: "Control pediatrico con campos de seguimiento por edad.",
+    description: "Control pediátrico con campos de seguimiento por edad.",
     category: "seguimiento",
-    tag: "Pediatria",
-    status: "Proximamente",
+    tag: "Pediatría",
+    status: "Próximamente",
   },
   {
     id: "salud-mental",
     title: "Salud mental",
-    description: "Tamizajes breves para ansiedad, depresion y riesgo psicosocial.",
+    description: "Tamizajes breves para ansiedad, depresión y riesgo psicosocial.",
     category: "tamizaje",
     tag: "Tamizaje",
-    status: "Proximamente",
+    status: "Próximamente",
   },
   {
     id: "referencia",
     title: "Referencia y contrarreferencia",
-    description: "Formato practico para enviar pacientes con datos clinicos completos.",
+    description: "Formato práctico para enviar pacientes con datos clínicos completos.",
     category: "referencia",
     tag: "Formato",
-    status: "Proximamente",
+    status: "Próximamente",
   },
 ];

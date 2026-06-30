@@ -62,7 +62,7 @@ export function HomePage({ onOpenTool }: HomePageProps) {
   }[backendStatus];
 
   const apiBadgeTone: BadgeTone =
-    backendStatus === "online" ? "teal" : backendStatus === "checking" ? "amber" : "muted";
+    backendStatus === "online" ? "brand" : backendStatus === "checking" ? "amber" : "muted";
 
   return (
     <main className="km-anim-screen min-h-screen bg-[#F7F4EF] text-[#1F2933]">
@@ -71,20 +71,20 @@ export function HomePage({ onOpenTool }: HomePageProps) {
         <section className="km-anim-fade-up mb-6 overflow-hidden rounded-[2rem] border border-[#E5DED4] bg-white shadow-sm">
           <div className="grid gap-0 lg:grid-cols-[1.4fr_0.6fr]">
             <div className="p-5 sm:p-8 xl:p-10">
-              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#0F766E]">
-                Kit del Medico de Primer Nivel
+              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#0179B1]">
+                Kit del Médico de Primer Nivel
               </p>
               <h1 className="mt-3 max-w-3xl text-3xl font-semibold tracking-tight sm:text-5xl xl:text-6xl">
-                Herramientas clinicas para documentar consultas mas rapido
+                Herramientas clínicas para documentar consultas más rápido
               </h1>
               <p className="mt-4 max-w-2xl text-base leading-7 text-[#52606D] sm:text-lg">
-                Formatos editables, notas SOAP, checklist de consulta e historia clinica.
-                Sin enviar datos clinicos al servidor.
+                Formatos editables, notas SOAP, checklist de consulta e historia clínica.
+                Sin enviar datos clínicos al servidor.
               </p>
 
-              <div className="mt-5 flex flex-wrap gap-2" aria-label="Caracteristicas del producto">
-                <Badge tone="teal">Beta</Badge>
-                <Badge tone="neutral">Procesamiento local</Badge>
+              <div className="mt-5 flex flex-wrap gap-2" aria-label="Características del producto">
+                <Badge tone="brand">Beta</Badge>
+                <Badge tone="neutral">Datos clínicos locales</Badge>
                 <Badge tone="neutral">Sin registro</Badge>
                 <Badge tone={apiBadgeTone} dot>{backendLabel}</Badge>
               </div>
@@ -93,14 +93,14 @@ export function HomePage({ onOpenTool }: HomePageProps) {
                 <button
                   type="button"
                   onClick={() => onOpenTool?.("soap")}
-                  className="km-press km-focus rounded-xl bg-[#0F766E] px-5 py-3 text-sm font-semibold text-white shadow-sm hover:bg-[#115E59] hover:shadow-md"
+                  className="km-press km-focus rounded-xl bg-[#0179B1] px-5 py-3 text-sm font-semibold text-white shadow-sm hover:bg-[#004C7A] hover:shadow-md"
                 >
                   Probar nota SOAP
                 </button>
                 <button
                   type="button"
                   onClick={() => onOpenTool?.("consultation-checklist")}
-                  className="km-press km-focus rounded-xl border border-[#E5DED4] bg-white px-5 py-3 text-sm font-semibold text-[#52606D] hover:border-[#0F766E] hover:text-[#0F766E]"
+                  className="km-press km-focus rounded-xl border border-[#E5DED4] bg-white px-5 py-3 text-sm font-semibold text-[#52606D] hover:border-[#0179B1] hover:text-[#0179B1]"
                 >
                   Ver checklist
                 </button>
@@ -111,35 +111,39 @@ export function HomePage({ onOpenTool }: HomePageProps) {
               </p>
             </div>
 
-            {/* Seccion de privacidad: visible arriba del pliegue */}
-            <aside className="bg-[#1F2933] p-5 text-white sm:p-8 xl:p-10">
-              <p className="text-sm font-semibold text-white/60">Privacidad por diseno</p>
-              <ul className="mt-4 grid gap-3 text-sm leading-6 text-white/85">
+            {/* Sección de privacidad: visible arriba del pliegue */}
+            <aside className="bg-[#013762] p-5 text-white sm:p-8 xl:p-10">
+              <p className="text-sm font-semibold text-white/65">Privacidad por diseño</p>
+              <ul className="mt-4 grid gap-3 text-sm leading-6 text-white/90">
                 <li className="flex gap-2">
-                  <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#34D399]" />
-                  Procesamiento local en tu navegador.
+                  <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#47DAD6]" />
+                  Datos clínicos locales: se procesan en tu navegador.
                 </li>
                 <li className="flex gap-2">
-                  <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#34D399]" />
-                  Los borradores se guardan solo en este dispositivo.
+                  <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#47DAD6]" />
+                  Borradores guardados solo en este dispositivo.
                 </li>
                 <li className="flex gap-2">
-                  <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#34D399]" />
-                  No sustituye tu juicio clinico.
+                  <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#47DAD6]" />
+                  Sin enviar datos clínicos: el backend solo verifica el estado de la API.
+                </li>
+                <li className="flex gap-2">
+                  <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#47DAD6]" />
+                  No sustituye tu juicio clínico.
                 </li>
               </ul>
-              <p className="mt-5 rounded-2xl bg-white/10 p-4 text-xs leading-5 text-white/65">
-                Esta app organiza informacion. No sustituye guias, normas, protocolos institucionales ni juicio medico.
+              <p className="mt-5 rounded-2xl bg-white/10 p-4 text-xs leading-5 text-white/70">
+                Esta app organiza información. No sustituye guías, normas, protocolos institucionales ni juicio médico.
               </p>
             </aside>
           </div>
         </section>
 
-        {/* Seccion de herramientas disponibles */}
+        {/* Sección de herramientas disponibles */}
         <div className="km-anim-fade-up mb-4 flex items-end justify-between gap-4" style={{ animationDelay: "60ms" }}>
           <div>
             <h2 className="text-xl font-semibold tracking-tight sm:text-2xl">Herramientas disponibles</h2>
-            <p className="mt-1 text-sm text-[#697586]">Abre, llena y copia al expediente. Lo siguiente: referencia, consentimiento y cronicos.</p>
+            <p className="mt-1 text-sm text-[#697586]">Abre, llena y copia al expediente. Lo siguiente: referencia, consentimiento y crónicos.</p>
           </div>
         </div>
 
@@ -149,14 +153,14 @@ export function HomePage({ onOpenTool }: HomePageProps) {
             onChange={(event) => setQuery(event.target.value)}
             placeholder="Busca: SOAP, diabetes, referencia..."
             aria-label="Buscar herramientas"
-            className="w-full rounded-2xl border border-[#E5DED4] bg-white px-4 py-3 text-base outline-none transition placeholder:text-[#9AA4B2] focus:border-[#0F766E] focus:ring-4 focus:ring-[#0F766E]/10"
+            className="w-full rounded-2xl border border-[#E5DED4] bg-white px-4 py-3 text-base outline-none transition placeholder:text-[#9AA4B2] focus:border-[#0179B1] focus:ring-4 focus:ring-[#0179B1]/15"
           />
           <p className="rounded-2xl border border-[#E5DED4] bg-white px-4 py-3 text-sm font-semibold text-[#697586]">
             {filteredTools.length} herramientas visibles
           </p>
         </div>
 
-        <nav className="km-anim-fade-up mb-5 flex gap-2 overflow-x-auto pb-1" style={{ animationDelay: "160ms" }} aria-label="Categorias de herramientas">
+        <nav className="km-anim-fade-up mb-5 flex gap-2 overflow-x-auto pb-1" style={{ animationDelay: "160ms" }} aria-label="Categorías de herramientas">
           {toolCategories.map((category) => {
             const isActive = category.id === activeCategory;
 
@@ -165,11 +169,12 @@ export function HomePage({ onOpenTool }: HomePageProps) {
                 key={category.id}
                 type="button"
                 onClick={() => setActiveCategory(category.id)}
+                aria-pressed={isActive}
                 className={[
                   "km-press km-focus whitespace-nowrap rounded-full px-4 py-2 text-sm font-semibold",
                   isActive
-                    ? "bg-[#1F2933] text-white"
-                    : "border border-[#E5DED4] bg-white text-[#52606D] hover:border-[#0F766E] hover:text-[#0F766E]",
+                    ? "bg-[#013762] text-white"
+                    : "border border-[#E5DED4] bg-white text-[#52606D] hover:border-[#0179B1] hover:text-[#0179B1]",
                 ].join(" ")}
               >
                 {category.label}
@@ -180,7 +185,7 @@ export function HomePage({ onOpenTool }: HomePageProps) {
 
         {filteredTools.length === 0 && (
           <div className="km-anim-fade-up mb-24 rounded-3xl border border-dashed border-[#E5DED4] bg-white p-8 text-center">
-            <p className="text-sm font-semibold text-[#344054]">Sin resultados para tu busqueda.</p>
+            <p className="text-sm font-semibold text-[#344054]">Sin resultados para tu búsqueda.</p>
             <p className="mt-1 text-sm text-[#697586]">Prueba con otra palabra o limpia los filtros.</p>
           </div>
         )}
@@ -193,7 +198,7 @@ export function HomePage({ onOpenTool }: HomePageProps) {
               <article
                 key={tool.id}
                 style={{ animationDelay: `${Math.min(index, 8) * 45}ms` }}
-                className="km-anim-fade-up group rounded-3xl border border-[#E5DED4] bg-white p-5 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-[#0F766E] hover:shadow-lg"
+                className="km-anim-fade-up group rounded-3xl border border-[#E5DED4] bg-white p-5 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-[#0179B1] hover:shadow-lg"
               >
                 <div className="mb-4 flex items-center justify-between gap-3">
                   <span className="rounded-full bg-[#F7F4EF] px-3 py-1 text-xs font-semibold text-[#52606D]">
@@ -203,7 +208,7 @@ export function HomePage({ onOpenTool }: HomePageProps) {
                     className={[
                       "rounded-full px-3 py-1 text-xs font-semibold",
                       isReady
-                        ? "bg-[#E6F3EF] text-[#115E59]"
+                        ? "bg-[#E3F1F8] text-[#004C7A]"
                         : "bg-[#F3EEE7] text-[#8A6A3C]",
                     ].join(" ")}
                   >
@@ -223,7 +228,7 @@ export function HomePage({ onOpenTool }: HomePageProps) {
                   className={[
                     "km-focus mt-5 w-full rounded-xl px-4 py-3 text-sm font-semibold transition duration-200",
                     isReady
-                      ? "bg-[#0F766E] text-white shadow-sm hover:bg-[#115E59] hover:shadow-md active:scale-[0.98]"
+                      ? "bg-[#0179B1] text-white shadow-sm hover:bg-[#004C7A] hover:shadow-md active:scale-[0.98]"
                       : "cursor-not-allowed bg-[#F3EEE7] text-[#9AA4B2]",
                   ].join(" ")}
                 >
@@ -236,7 +241,7 @@ export function HomePage({ onOpenTool }: HomePageProps) {
 
         <footer className="fixed inset-x-0 bottom-0 border-t border-[#E5DED4] bg-white/90 px-4 py-3 backdrop-blur sm:hidden">
           <div className="mx-auto grid max-w-md grid-cols-3 gap-2 text-xs font-medium text-[#697586]">
-            <button className="rounded-xl bg-[#E6F3EF] px-3 py-2 text-[#115E59]">Herramientas</button>
+            <button className="rounded-xl bg-[#E3F1F8] px-3 py-2 text-[#004C7A]">Herramientas</button>
             <button className="rounded-xl px-3 py-2">Guardadas</button>
             <button className="rounded-xl px-3 py-2">Aviso</button>
           </div>
@@ -246,18 +251,18 @@ export function HomePage({ onOpenTool }: HomePageProps) {
   );
 }
 
-type BadgeTone = "teal" | "amber" | "muted" | "neutral";
+type BadgeTone = "brand" | "amber" | "muted" | "neutral";
 
 function Badge({ children, tone, dot = false }: { children: ReactNode; tone: BadgeTone; dot?: boolean }) {
   const toneClass = {
-    teal: "bg-[#E6F3EF] text-[#115E59]",
+    brand: "bg-[#E3F1F8] text-[#004C7A]",
     amber: "bg-[#FBEFD8] text-[#8A6A3C]",
     muted: "bg-[#F0EEE9] text-[#52606D]",
     neutral: "bg-[#F0EEE9] text-[#52606D]",
   }[tone];
 
   const dotClass = {
-    teal: "bg-[#0F766E]",
+    brand: "bg-[#0179B1]",
     amber: "bg-[#D97706]",
     muted: "bg-[#9AA4B2]",
     neutral: "bg-[#9AA4B2]",
