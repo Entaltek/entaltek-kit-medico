@@ -14,17 +14,17 @@ const checklistItems: ChecklistItem[] = [
   {
     id: "reason",
     label: "Motivo de consulta registrado",
-    helper: "Que quede claro por que acude hoy y desde cuando.",
+    helper: "Que quede claro por qué acude hoy y desde cuándo.",
   },
   {
     id: "allergies",
     label: "Alergias preguntadas",
-    helper: "Medicamentos, alimentos, latex u otras reacciones relevantes.",
+    helper: "Medicamentos, alimentos, látex u otras reacciones relevantes.",
   },
   {
     id: "meds",
     label: "Medicamentos actuales revisados",
-    helper: "Incluye dosis, automedicacion y tratamientos recientes.",
+    helper: "Incluye dosis, automedicación y tratamientos recientes.",
   },
   {
     id: "vitals",
@@ -33,12 +33,12 @@ const checklistItems: ChecklistItem[] = [
   },
   {
     id: "exam",
-    label: "Exploracion dirigida documentada",
+    label: "Exploración dirigida documentada",
     helper: "Solo lo relevante para el problema actual, pero con estructura.",
   },
   {
     id: "impression",
-    label: "Impresion clinica o problema activo",
+    label: "Impresión clínica o problema activo",
     helper: "Describe el problema principal sin sobreexplicar.",
   },
   {
@@ -49,12 +49,12 @@ const checklistItems: ChecklistItem[] = [
   {
     id: "alarm",
     label: "Datos de alarma indicados",
-    helper: "Senales por las que debe regresar o acudir a urgencias.",
+    helper: "Señales por las que debe regresar o acudir a urgencias.",
   },
   {
     id: "followup",
     label: "Seguimiento definido",
-    helper: "Fecha, condicion o criterio para revaloracion.",
+    helper: "Fecha, condición o criterio para revaloración.",
   },
 ];
 
@@ -105,20 +105,20 @@ export function ConsultationChecklistTool({ onBack }: ConsultationChecklistToolP
           <button
             type="button"
             onClick={onBack}
-            className="km-press km-focus mb-4 rounded-full border border-[#E5DED4] bg-white px-4 py-2 text-sm font-medium text-[#52606D] hover:border-[#0F766E] hover:text-[#0F766E]"
+            className="km-press km-focus mb-4 rounded-full border border-[#E5DED4] bg-white px-4 py-2 text-sm font-medium text-[#52606D] hover:border-[#0179B1] hover:text-[#0179B1]"
           >
             Volver al kit
           </button>
 
           <div className="rounded-[2rem] border border-[#E5DED4] bg-white p-5 shadow-sm sm:p-7">
-            <span className="inline-flex rounded-full bg-[#E6F3EF] px-3 py-1 text-xs font-semibold text-[#115E59]">
-              Checklist practico
+            <span className="inline-flex rounded-full bg-[#E3F1F8] px-3 py-1 text-xs font-semibold text-[#004C7A]">
+              Checklist práctico
             </span>
             <h1 className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">
               Checklist de consulta
             </h1>
             <p className="mt-3 max-w-2xl text-base leading-7 text-[#52606D]">
-              Revisa lo esencial antes de cerrar la consulta. Rapido, claro y sin ruido.
+              Revisa lo esencial antes de cerrar la consulta. Rápido, claro y sin ruido.
             </p>
           </div>
         </header>
@@ -131,7 +131,7 @@ export function ConsultationChecklistTool({ onBack }: ConsultationChecklistToolP
                 Marca lo que ya revisaste durante la consulta.
               </p>
             </div>
-            <div className="rounded-2xl bg-[#E6F3EF] px-4 py-3 text-center text-[#115E59]">
+            <div className="rounded-2xl bg-[#E3F1F8] px-4 py-3 text-center text-[#004C7A]">
               <p className="text-2xl font-semibold">{progress}%</p>
               <p className="text-xs font-semibold">completo</p>
             </div>
@@ -150,8 +150,8 @@ export function ConsultationChecklistTool({ onBack }: ConsultationChecklistToolP
                   className={[
                     "km-focus rounded-2xl border p-4 text-left transition duration-200 active:scale-[0.99]",
                     isChecked
-                      ? "border-[#0F766E] bg-[#E6F3EF]"
-                      : "border-[#E5DED4] bg-white hover:-translate-y-0.5 hover:border-[#A7C4B5] hover:shadow-sm",
+                      ? "border-[#0179B1] bg-[#E3F1F8]"
+                      : "border-[#E5DED4] bg-white hover:-translate-y-0.5 hover:border-[#0179B1] hover:shadow-sm",
                   ].join(" ")}
                 >
                   <div className="flex gap-3">
@@ -160,7 +160,7 @@ export function ConsultationChecklistTool({ onBack }: ConsultationChecklistToolP
                       className={[
                         "mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border text-xs font-bold",
                         isChecked
-                          ? "border-[#0F766E] bg-[#0F766E] text-white"
+                          ? "border-[#0179B1] bg-[#0179B1] text-white"
                           : "border-[#CBD5E1] text-transparent",
                       ].join(" ")}
                     >
@@ -177,20 +177,20 @@ export function ConsultationChecklistTool({ onBack }: ConsultationChecklistToolP
           </div>
         </section>
 
-        <aside className="rounded-[2rem] border border-[#E5DED4] bg-[#1F2933] p-5 text-white shadow-sm sm:p-6 lg:sticky lg:top-5 lg:self-start">
+        <aside className="rounded-[2rem] border border-[#E5DED4] bg-[#013762] p-5 text-white shadow-sm sm:p-6 lg:sticky lg:top-5 lg:self-start">
           <h2 className="text-lg font-semibold">Resumen</h2>
-          <p className="mt-1 text-sm leading-6 text-white/65">
+          <p className="mt-1 text-sm leading-6 text-white/70">
             Puedes copiarlo como recordatorio o usarlo para documentar pendientes.
           </p>
 
           <label className="mt-5 grid gap-2">
-            <span className="text-sm font-semibold text-white/80">Notas adicionales</span>
+            <span className="text-sm font-semibold text-white/85">Notas adicionales</span>
             <textarea
               value={note}
               onChange={(event) => setNote(event.target.value)}
               placeholder="Ej. Paciente entiende plan y datos de alarma."
               rows={5}
-              className="w-full resize-y rounded-xl border border-white/10 bg-white/10 px-4 py-3 text-sm text-white outline-none placeholder:text-white/35 focus:border-white/40"
+              className="w-full resize-y rounded-xl border border-white/10 bg-white/10 px-4 py-3 text-sm text-white outline-none placeholder:text-white/35 focus:border-[#47DAD6]"
             />
           </label>
 
