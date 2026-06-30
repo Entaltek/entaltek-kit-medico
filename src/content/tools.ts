@@ -62,7 +62,7 @@ export const tools: ToolDefinition[] = [
     description: "Formato base para antecedentes, interrogatorio, exploracion e impresion clinica.",
     category: "formatos",
     tag: "Formato",
-    status: "Proximamente",
+    status: "Listo",
   },
   {
     id: "exploracion-fisica",
